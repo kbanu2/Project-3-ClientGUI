@@ -24,13 +24,13 @@ public class Client extends Thread{
         this.guessingRoundSceneController = guessingRoundSceneController;
     }
 
-    @Override
     public void run(){
         try{
             connection = new Socket("127.0.0.1", port);
-            in = new ObjectInputStream(connection.getInputStream());
             out = new ObjectOutputStream(connection.getOutputStream());
+            in = new ObjectInputStream(connection.getInputStream());
             connection.setTcpNoDelay(true);
+
             out.writeObject(username);
         }
         catch (Exception e){
