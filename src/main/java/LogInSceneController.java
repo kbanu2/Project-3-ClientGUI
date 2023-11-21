@@ -54,6 +54,7 @@ public class LogInSceneController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
         root = loader.load();
         CategoriesSceneController csc = loader.getController();
+        client.setCategoriesController(csc);
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

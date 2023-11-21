@@ -11,6 +11,7 @@ public class Client extends Thread{
     ObjectOutputStream out;
     CategoriesSceneController categoriesSceneController;
     GuessingRoundController guessingRoundSceneController;
+
     public Client(int port){
         this.port = port;
     }

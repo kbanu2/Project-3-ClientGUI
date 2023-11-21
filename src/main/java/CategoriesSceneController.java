@@ -36,7 +36,7 @@ public class CategoriesSceneController{
     GuessingGame game;  //Instance of the game logic
 
     public void InitializeGame(){   //Only called when it's the first game or when the player wants to continue playing after winning/losing
-        clie
+        //clie //FIXME
 
     }
 
@@ -67,7 +67,7 @@ public class CategoriesSceneController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
-
+        client.setGuessingRoundSceneController(grc);
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -89,6 +89,7 @@ public class CategoriesSceneController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
+        client.setGuessingRoundSceneController(grc);
 
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -110,6 +111,7 @@ public class CategoriesSceneController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
+        client.setGuessingRoundSceneController(grc);
 
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
