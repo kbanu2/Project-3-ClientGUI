@@ -1,12 +1,14 @@
-import java.io.Serial;
+
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 public class GameState implements Serializable {
-    public ArrayList<Character> lettersFound;
-    public int numGuesses;
-    public boolean gameOver;
-    public boolean gameWon;
-    @Serial
-    private static final long serialVersionUID = 1234567L;
+    int round_outcome;
+    int index_of_guess;
+    int category;
+    int guesses_left;
+    int words_guessed;
+    String guess;
+    boolean gameWon;
+    boolean roundWon;
 }

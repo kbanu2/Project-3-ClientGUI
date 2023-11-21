@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Green;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuessingRoundController">
+   <children>
+      <Label fx:id="User" layoutX="26.0" layoutY="14.0" text="User:">
+         <font>
+            <Font name="Bell MT Bold" size="20.0" />
+         </font></Label>
+      <Label fx:id="Category" layoutX="26.0" layoutY="44.0" text="Category:">
+         <font>
+            <Font name="Bell MT Bold" size="20.0" />
+         </font></Label>
+      <Label id="WordsGuessed" fx:id="WordsGuessed" layoutX="389.0" layoutY="14.0" text="Words Guessed:">
+         <font>
+            <Font name="Bell MT Bold" size="20.0" />
+         </font></Label>
+      <Label id="GuessesRemaining" fx:id="GuessesRemaining" layoutX="389.0" layoutY="44.0" text="Guesses Remaining:">
+         <font>
+            <Font name="Bell MT Bold" size="20.0" />
+         </font></Label>
+      <Button fx:id="A" layoutX="122.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectA" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="A">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="B" layoutX="163.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectB" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="B">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="C" layoutX="202.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectC" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="C">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="D" layoutX="243.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectD" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="D">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="E" layoutX="283.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectE" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="E">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="F" layoutX="324.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectF" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="F">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="G" layoutX="365.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectG" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="G">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="H" layoutX="408.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectH" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="H">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="I" layoutX="450.0" layoutY="230.0" mnemonicParsing="false" onAction="#SelectI" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="I">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="J" layoutX="149.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectJ" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="J">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="K" layoutX="188.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectK" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="K">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="L" layoutX="229.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectL" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="L">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="M" layoutX="269.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectM" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="M">
+         <font>
+            <Font name="Bell MT" size="12.0" />
+         </font></Button>
+      <Button fx:id="N" layoutX="310.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectN" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="N">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="O" layoutX="351.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectO" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="O">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="P" layoutX="394.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectP" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="P">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="Q" layoutX="436.0" layoutY="272.0" mnemonicParsing="false" onAction="#SelectQ" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="Q">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="R" layoutX="188.0" layoutY="313.0" mnemonicParsing="false" onAction="#SelectR" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="R">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="S" layoutX="229.0" layoutY="313.0" mnemonicParsing="false" onAction="#SelectS" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="S">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="T" layoutX="269.0" layoutY="313.0" mnemonicParsing="false" onAction="#SelectT" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="T">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="U" layoutX="311.0" layoutY="313.0" mnemonicParsing="false" onAction="#SelectU" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="U">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="V" layoutX="351.0" layoutY="313.0" mnemonicParsing="false" onAction="#SelectV" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="V">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="W" layoutX="394.0" layoutY="313.0" mnemonicParsing="false" onAction="#SelectW" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="W">
+         <font>
+            <Font name="Bell MT" size="12.0" />
+         </font></Button>
+      <Button fx:id="X" layoutX="255.0" layoutY="356.0" mnemonicParsing="false" onAction="#SelectX" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="X">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="Y" layoutX="296.0" layoutY="356.0" mnemonicParsing="false" onAction="#SelectY" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="Y">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <Button fx:id="Z" layoutX="339.0" layoutY="356.0" mnemonicParsing="false" onAction="#SelectZ" prefHeight="30.0" prefWidth="29.0" style="-fx-opacity: 200;" text="Z">
+         <font>
+            <Font name="Bell MT" size="13.0" />
+         </font></Button>
+      <HBox fx:id="WordPlace" layoutX="126.0" layoutY="133.0" prefHeight="49.0" prefWidth="349.0" />
+      <HBox fx:id="LeftButton" layoutX="14.0" layoutY="117.0" prefHeight="100.0" prefWidth="108.0" />
+      <HBox fx:id="RightButton" layoutX="477.0" layoutY="117.0" prefHeight="100.0" prefWidth="108.0" />
+      <HBox fx:id="BottomLabel" layoutX="126.0" layoutY="176.0" prefHeight="49.0" prefWidth="349.0" />
+      <HBox fx:id="TopLabel" layoutX="124.0" layoutY="93.0" prefHeight="49.0" prefWidth="349.0" />
+   </children>
+</Pane>
