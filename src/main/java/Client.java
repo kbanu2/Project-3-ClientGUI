@@ -39,7 +39,7 @@ public class Client extends Thread{
 
         try{
             GameState state = (GameState) in.readObject();
-            guessingRoundSceneController.accept(state);
+            categoriesSceneController.accept(state);
         }
         catch(Exception e){
             System.out.println(e.getMessage());

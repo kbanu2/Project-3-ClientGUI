@@ -30,6 +30,10 @@ public class CategoriesSceneController{
         
     }
 
+    public void accept(GameState g){
+        game = g;
+    }
+
     public void getClient(Client c){
         client = c;
     }
