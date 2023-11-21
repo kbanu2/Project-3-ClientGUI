@@ -24,6 +24,7 @@ public class CategoriesSceneController{
 
     String username;
     Client client;
+    GameState game;
     public void setUser(String name){
         username = name;
         
@@ -33,26 +34,19 @@ public class CategoriesSceneController{
         client = c;
     }
 
-    GuessingGame game;  //Instance of the game logic
 
-    public void InitializeGame(){   //Only called when it's the first game or when the player wants to continue playing after winning/losing
-        //clie //FIXME
-
-    }
-
-    public void setGame(GuessingGame g){   //Called after every non-final round
-        game = g; 
+    public void setGame(){   //Called after every non-final round
         
         //If a round has been won check to see which category cannot be played anymore
-        if(game.category_track.get(0)==0){
+        if(game.category1==1){
             Category1.setDisable(true);
         }
         
-        if(game.category_track.get(1)==0){
+        if(game.category2==1){
             Category2.setDisable(true);
         }
 
-        if(game.category_track.get(2)==0){
+        if(game.category3==1){
             Category3.setDisable(true);
         }
     }
@@ -61,7 +55,7 @@ public class CategoriesSceneController{
 
     public void ChooseCategory1(ActionEvent event) throws IOException {
        
-        game.pick_from_category(1);
+        client.pickCategory(1);
         
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
@@ -76,54 +70,53 @@ public class CategoriesSceneController{
         grc.DisplayUser(username);
         grc.DisplayCategory("Food");
         grc.DisplayWords(String.valueOf(game.words_guessed));
-        grc.UpdateGuesses(String.valueOf(game.round.guesses));
+        grc.UpdateGuesses(String.valueOf(game.guesses_left));
         grc.getGame(game);
-        grc.DisplayWordLabels(game.round.word.length());
+        grc.DisplayWordLabels(game.length);
         
     }
 
     public void ChooseCategory2(ActionEvent event) throws IOException {
 
-        game.pick_from_category(2);
+        client.pickCategory(2);
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
         client.setGuessingRoundSceneController(grc);
-
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show(); 
         grc.DisplayUser(username);
-        grc.DisplayCategory("Animals");
+        grc.DisplayCategory("Food");
         grc.DisplayWords(String.valueOf(game.words_guessed));
-        grc.UpdateGuesses(String.valueOf(game.round.guesses));
+        grc.UpdateGuesses(String.valueOf(game.guesses_left));
         grc.getGame(game);
-        grc.DisplayWordLabels(game.round.word.length());
+        grc.DisplayWordLabels(game.length);
     }
 
     public void ChooseCategory3(ActionEvent event) throws IOException {
 
-        game.pick_from_category(3);
+        client.pickCategory(3);
+    
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
         client.setGuessingRoundSceneController(grc);
-
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show(); 
         grc.DisplayUser(username);
-        grc.DisplayCategory("Countries");
+        grc.DisplayCategory("Food");
         grc.DisplayWords(String.valueOf(game.words_guessed));
-        grc.UpdateGuesses(String.valueOf(game.round.guesses));
+        grc.UpdateGuesses(String.valueOf(game.guesses_left));
         grc.getGame(game);
-        grc.DisplayWordLabels(game.round.word.length());
+        grc.DisplayWordLabels(game.length);
     }
 
 }

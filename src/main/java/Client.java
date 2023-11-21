@@ -1,8 +1,6 @@
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
-import java.util.function.Consumer;
 
 public class Client extends Thread{
     int port;
@@ -43,14 +41,26 @@ public class Client extends Thread{
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-    }
-
-    public void sendGuess(Character selection){
+    }  
+    
+    public void pickCategory(int category){
         try{
-            out.writeObject(selection);
+            out.writeObject(category);
+
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
+
+    public void sendGuess(String guess){
+        try{
+            out.writeObject(guess);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    
 }

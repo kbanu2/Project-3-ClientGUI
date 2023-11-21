@@ -34,14 +34,22 @@ public class GuessingRoundController{
     Button Exit, PlayAgain;
     ArrayList<Label> letterLabel = new ArrayList<>();
 
-    GuessingGame game;
+    //GuessingGame game;
     String username;
+
+    Client client;
+
+    public void getClient(Client c){
+        client = c;
+    }
+
+    GameState game;
+    public void getGame(GameState g){
+        game = g;
+    }
 
     //Code Below Organizes the labels to be displayed
 
-    public void getGame(GuessingGame g){
-        game = g;
-    }
 
     public void DisplayUser(String name){
         username = name;
@@ -64,10 +72,10 @@ public class GuessingRoundController{
     }
 
     public void DisplayWordLabels(int wordsize) {
-        System.out.println("WORD: " + game.round.word);
+        System.out.println("WORD: " + game.word);
         WordPlace.setSpacing(20);
 
-        for (int i = 0; i < wordsize; i++) {
+        for (int i = 0; i < game.length; i++) {
             letterLabel.add(new Label());
             letterLabel.get(i).setText("_"); 
             letterLabel.get(i).setStyle("-fx-font-size: 3em; -fx-font-family: 'Bell MT';");           
@@ -81,303 +89,124 @@ public class GuessingRoundController{
     
     //Helper funtion that handles selected button
     public void SelectLetter(Button b, String s, ActionEvent event){
-        //To be changed?
-        //int guess = game.play_round(s);   //The client has to be sending the guessed letter to the server and the server return the value of guess back to the client
+        client.sendGuess(s); 
+        //I am sending the guess
+        //The gameState updates
+        //Do I need to receive it back changed??
 
         b.setStyle("-fx-background-color:#000000; -fx-text-fill: #FFFFFF;");
         b.setDisable(true);
 
         //When a guess has been made
-        if(guess==1){   //Correct guess
+        if(game.round_outcome==1){   //Correct guess
 
             //Check if it is a hit or a miss and update label
-            for(int i=0; i<game.round.word_arr.size(); i++){
-                if(s.equals(game.round.word_arr.get(i))){
+            for(int i=0; i<game.length; i++){
+                if(s.equals(game.word.get(i))){
                     letterLabel.get(i).setText(s);
                 }
             }
 
-            UpdateGuesses(String.valueOf(game.round.guesses));  //Update remaining guesses
+            UpdateGuesses(String.valueOf(game.guesses_left));  //Update remaining guesses
 
-        }else if(guess==-1){    //Wasted all the guesses 
+        }else if(game.round_outcome==-1){    //Wasted all the guesses 
         
-            UpdateGuesses(String.valueOf(game.round.guesses));
+            UpdateGuesses(String.valueOf(game.guesses_left));
 
             //Checking which category has been played and if the game is over or if the player has additional attempts
             //Checking if category 1 was the currently played category
-            if(game.category_played==0){
+            if(game.gameWon==-1){
+                Outcome = new Label("Better Luck Next Time");
+                Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
+                BottomLabel.getChildren().add(Outcome); 
+                BottomLabel.setAlignment(Pos.CENTER);
 
-                //If category 1 has been played 3 times
-                if(game.categories.c1_guesses==3){
+                WinLose = new Label("YOU LOSE");
+                WinLose.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
+                TopLabel.getChildren().add(WinLose);
+                TopLabel.setAlignment(Pos.CENTER);
 
-                    Outcome = new Label("Better Luck Next Time");
-                    Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
-                    BottomLabel.getChildren().add(Outcome); 
-                    BottomLabel.setAlignment(Pos.CENTER);
+                PlayAgain = new Button(" Play \nAgain");
+                PlayAgain.setPrefWidth(60);
+		        PlayAgain.setPrefHeight(45);
+		        PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
+                PlayAgain.setOnMouseEntered(h -> PlayAgain.setStyle("-fx-background-color:#7FFF00; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
+		        PlayAgain.setOnMouseExited(h -> PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
+                LeftButton.getChildren().add(PlayAgain);
+                LeftButton.setAlignment(Pos.CENTER_LEFT);
 
-                    WinLose = new Label("YOU LOSE");
-                    WinLose.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
-                    TopLabel.getChildren().add(WinLose);
-                    TopLabel.setAlignment(Pos.CENTER);
+                Exit = new Button("Exit");
+                Exit.setPrefWidth(60);
+		        Exit.setPrefHeight(45);
+                Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
+                Exit.setOnMouseEntered(h -> Exit.setStyle("-fx-background-color:#FF0000; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
+		        Exit.setOnMouseExited(h -> Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
+                RightButton.getChildren().add(Exit);
+                RightButton.setAlignment(Pos.CENTER_RIGHT);
 
-                    PlayAgain = new Button(" Play \nAgain");
-                    PlayAgain.setPrefWidth(60);
-		            PlayAgain.setPrefHeight(45);
-		            PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
-                    PlayAgain.setOnMouseEntered(h -> PlayAgain.setStyle("-fx-background-color:#7FFF00; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
-		            PlayAgain.setOnMouseExited(h -> PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
-                    LeftButton.getChildren().add(PlayAgain);
-                    LeftButton.setAlignment(Pos.CENTER_LEFT);
-
-                    Exit = new Button("Exit");
-                    Exit.setPrefWidth(60);
-		            Exit.setPrefHeight(45);
-                    Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
-                    Exit.setOnMouseEntered(h -> Exit.setStyle("-fx-background-color:#FF0000; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
-		            Exit.setOnMouseExited(h -> Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
-                    RightButton.getChildren().add(Exit);
-                    RightButton.setAlignment(Pos.CENTER_RIGHT);
-
-                    PlayAgain.setOnAction(new EventHandler<ActionEvent>() {
-			            public void handle(ActionEvent e){
-				            FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
-                            try{
-                                root = loader.load();
-                            }catch(Exception ex){
+                PlayAgain.setOnAction(new EventHandler<ActionEvent>() {
+			        public void handle(ActionEvent e){
+				    FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
+                    try{
+                        root = loader.load();
+                    }catch(Exception ex){
                             
-                        }
-                        CategoriesSceneController csc = loader.getController();
+                    }
+                    CategoriesSceneController csc = loader.getController();
                         
-                        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show(); 
-                        csc.InitializeGame();
-                        csc.setUser(username);
-			            }
-		            });
+                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show(); 
+                    csc.setUser(username);
+			        }
+		        });
 
-                    Exit.setOnAction(e -> System.exit(0));
+                Exit.setOnAction(e -> System.exit(0));
 
 
-                }else{  //If player has more attempts left to play the game
-                    Outcome = new Label("Too Bad, Try again");
-                    Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT';"); 
-                    BottomLabel.getChildren().add(Outcome); 
-                    BottomLabel.setAlignment(Pos.CENTER);
+            }else if(game.roundWon==-1){  //If player has more attempts left to play the game
+                Outcome = new Label("Too Bad, Try again");
+                Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT';"); 
+                BottomLabel.getChildren().add(Outcome); 
+                BottomLabel.setAlignment(Pos.CENTER);
 
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                PauseTransition pause = new PauseTransition(Duration.seconds(2));
 
-                    //Delay before changing the scene
-		            pause.setOnFinished(e -> {
+                //Delay before changing the scene
+		        pause.setOnFinished(e -> {
                     
-                        //Go to categories
-                         FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
-                        try{
-                            root = loader.load();
-                        }catch(Exception ex){
+                    //Go to categories
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
+                    try{
+                        root = loader.load();
+                    }catch(Exception ex){
                             
-                        }
-                        CategoriesSceneController csc = loader.getController();
+                    }
+                    CategoriesSceneController csc = loader.getController();
                         
-                        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show(); 
-                        csc.setGame(game);
-                        csc.setUser(username);
-                    });
+                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show(); 
+                    //csc.setGame(game);
+                    csc.setUser(username);
+                });
 
-                    pause.play();
-                }
-
-            //Checking if category 2 was the currently played category
-            }else if(game.category_played==1){
-                //If category 2 has been played 3 times
-                if(game.categories.c2_guesses==3){
-
-                    Outcome = new Label("Better Luck Next Time");
-                    Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
-                    BottomLabel.getChildren().add(Outcome); 
-                    BottomLabel.setAlignment(Pos.CENTER);
-
-                    WinLose = new Label("YOU LOSE");
-                    WinLose.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
-                    TopLabel.getChildren().add(WinLose);
-                    TopLabel.setAlignment(Pos.CENTER);
-
-                    PlayAgain = new Button(" Play \nAgain");
-                    PlayAgain.setPrefWidth(60);
-		            PlayAgain.setPrefHeight(45);
-		            PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
-                    PlayAgain.setOnMouseEntered(h -> PlayAgain.setStyle("-fx-background-color:#7FFF00; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
-		            PlayAgain.setOnMouseExited(h -> PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
-                    LeftButton.getChildren().add(PlayAgain);
-                    LeftButton.setAlignment(Pos.CENTER_LEFT);
-
-                    Exit = new Button("Exit");
-                    Exit.setPrefWidth(60);
-		            Exit.setPrefHeight(45);
-                    Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
-                    Exit.setOnMouseEntered(h -> Exit.setStyle("-fx-background-color:#FF0000; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
-		            Exit.setOnMouseExited(h -> Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
-                    RightButton.getChildren().add(Exit);
-                    RightButton.setAlignment(Pos.CENTER_RIGHT);
-
-                    PlayAgain.setOnAction(new EventHandler<ActionEvent>() {
-			            public void handle(ActionEvent e){
-				            FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
-                            try{
-                                root = loader.load();
-                            }catch(Exception ex){
-                            
-                        }
-                        CategoriesSceneController csc = loader.getController();
-                        
-                        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show(); 
-                        csc.InitializeGame();
-                        csc.setUser(username);
-			            }
-		            });
-
-                    Exit.setOnAction(e -> System.exit(0));
-                    
-                }else{  //If player has additional attempts from category 2
-
-                    Outcome = new Label("Too Bad, Try again");
-                    Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT';");  
-                    BottomLabel.getChildren().add(Outcome); 
-                    BottomLabel.setAlignment(Pos.CENTER);
-
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
-
-                    //Delay before changing scenes
-		            pause.setOnFinished(e -> {
-                        
-                        //Go to categories
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
-                        try{
-                            root = loader.load();
-                        }catch(Exception ex){
-                            
-                        }
-                        CategoriesSceneController csc = loader.getController();
-                        
-                        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show(); 
-                        csc.setGame(game);
-                        csc.setUser(username);
-                        
-                    });
-
-                    pause.play();
-                }
-
-            //Checking if category 3 was the currently played category
-            }else{
-
-                //Checking if player has additional attempts from category 3
-                if(game.categories.c3_guesses==3){
-
-                    Outcome = new Label("Better Luck Next Time");
-                    Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
-                    BottomLabel.getChildren().add(Outcome); 
-                    BottomLabel.setAlignment(Pos.CENTER);
-
-                    WinLose = new Label("YOU LOSE");
-                    WinLose.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT'; -fx-text-fill: #FF0000;"); 
-                    TopLabel.getChildren().add(WinLose);
-                    TopLabel.setAlignment(Pos.CENTER);
-
-                    PlayAgain = new Button(" Play \nAgain");
-                    PlayAgain.setPrefWidth(60);
-		            PlayAgain.setPrefHeight(45);
-		            PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
-                    PlayAgain.setOnMouseEntered(h -> PlayAgain.setStyle("-fx-background-color:#7FFF00; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
-		            PlayAgain.setOnMouseExited(h -> PlayAgain.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
-                    LeftButton.getChildren().add(PlayAgain);
-                    LeftButton.setAlignment(Pos.CENTER_LEFT);
-
-                    Exit = new Button("Exit");
-                    Exit.setPrefWidth(60);
-		            Exit.setPrefHeight(45);
-                    Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';");
-                    Exit.setOnMouseEntered(h -> Exit.setStyle("-fx-background-color:#FF0000; -fx-font-size: 1em; -fx-text-fill: #FFFFFF; -fx-font-family: 'Bell MT';"));
-		            Exit.setOnMouseExited(h -> Exit.setStyle("-fx-background-color:#FFFFFF; -fx-font-size: 1em; -fx-text-fill: #000000; -fx-font-family: 'Bell MT';")); 
-                    RightButton.getChildren().add(Exit);
-                    RightButton.setAlignment(Pos.CENTER_RIGHT);
-
-                    PlayAgain.setOnAction(new EventHandler<ActionEvent>() {
-			            public void handle(ActionEvent e){
-				            FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
-                            try{
-                                root = loader.load();
-                            }catch(Exception ex){
-                            
-                        }
-                        CategoriesSceneController csc = loader.getController();
-                        
-                        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show(); 
-                        csc.InitializeGame();
-                        csc.setUser(username);
-			            }
-		            });
-
-                    Exit.setOnAction(e -> System.exit(0));
-                    
-                }else{  //Checking if player has attempts left from category 3
-
-                    Outcome = new Label("Too Bad, Try again");
-                    Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT';");  
-                    BottomLabel.getChildren().add(Outcome); 
-                    BottomLabel.setAlignment(Pos.CENTER);
-
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
-
-                    //Delay before changing scenes
-		            pause.setOnFinished(e -> {
-                    
-                        //Go to categories
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
-                        try{
-                            root = loader.load();
-                        }catch(Exception ex){
-                            
-                        }
-                        CategoriesSceneController csc = loader.getController();
-                        
-                        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show(); 
-                        csc.setGame(game);
-                        csc.setUser(username);
-                    });
-
-                    pause.play();
-                }
-
+                pause.play();
             }
 
+            
         //If player won the round
         }else{  
-            for(int i=0; i<game.round.word_arr.size(); i++){
-                if(s.equals(game.round.word_arr.get(i))){
+            for(int i=0; i<game.length; i++){
+                if(s.equals(game.word.get(i))){
                     letterLabel.get(i).setText(s);
-                    
                 }
             }
 
             //Checking if user won the game
-            if(game.words_guessed==3){
+            if(game.gameWon==1){
                 DisplayWords(String.valueOf(game.words_guessed));
 
                 Outcome = new Label("CONGRATULATIONS!!!");
@@ -424,7 +253,7 @@ public class GuessingRoundController{
                         scene = new Scene(root);
                         stage.setScene(scene);
                         stage.show(); 
-                        csc.InitializeGame();
+                        //csc.InitializeGame();
                         csc.setUser(username);
 			            }
 		            });
@@ -434,7 +263,7 @@ public class GuessingRoundController{
 
                 
                 
-            }else{  //If player has more rounds to play
+            }else if(game.roundWon == 1){  //If player has more rounds to play
 
                 Outcome = new Label("Nice Job!");
                 Outcome.setStyle("-fx-font-size: 2em; -fx-font-family: 'Bell MT';");  
@@ -458,7 +287,7 @@ public class GuessingRoundController{
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show(); 
-                    csc.setGame(game);
+                    csc.setGame();
                     csc.setUser(username);
                 });
 

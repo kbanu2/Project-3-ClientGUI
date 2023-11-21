@@ -49,6 +49,7 @@ public class LogInSceneController {
         }
 
         //This is where we initiate the client and connect to the server
+        client = new Client(Integer.valueOf(portText));
         client.start();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
@@ -61,7 +62,7 @@ public class LogInSceneController {
         stage.setScene(scene);
         stage.show(); 
         csc.setUser(username);
-        csc.InitializeGame();
+        csc.getClient(client);
     }
 
     //Helper functions that validate username and port#
