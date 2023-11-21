@@ -49,7 +49,7 @@ public class LogInSceneController {
         }
 
         //This is where we initiate the client and connect to the server
-        client = new Client(Integer.valueOf(portText));
+        client = new Client(Integer.valueOf(portText), username);
         client.start();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesScene.fxml"));
