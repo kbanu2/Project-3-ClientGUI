@@ -44,6 +44,11 @@ public class GuessingRoundController{
     }
 
     GameState game;
+
+    public void accept(GameState g){
+        game = g;
+    }
+
     public void getGame(GameState g){
         game = g;
     }
