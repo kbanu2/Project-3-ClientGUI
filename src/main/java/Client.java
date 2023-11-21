@@ -9,11 +9,18 @@ public class Client extends Thread{
     Socket connection;
     ObjectInputStream in;
     ObjectOutputStream out;
-    private Consumer<Serializable> callback;
-
-    public Client(Consumer<Serializable> callback, int port){
-        this.callback = callback;
+    CategoriesSceneController categoriesSceneController;
+    GuessingRoundController guessingRoundSceneController;
+    public Client(int port){
         this.port = port;
+    }
+
+    public void setCategoriesController(CategoriesSceneController categoriesSceneController){
+        this.categoriesSceneController = categoriesSceneController;
+    }
+
+    public void setGuessingRoundSceneController(GuessingRoundController guessingRoundSceneController){
+        this.guessingRoundSceneController = guessingRoundSceneController;
     }
 
     @Override
@@ -30,7 +37,7 @@ public class Client extends Thread{
 
         try{
             GameState state = (GameState) in.readObject();
-            callback.accept(state); //ToDo: Define accept to update ClientGUI
+            //guessingRoundController.accept(state);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
