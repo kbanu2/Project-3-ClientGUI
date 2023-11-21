@@ -38,8 +38,10 @@ public class Client extends Thread{
         }
 
         try{
-            GameState state = (GameState) in.readObject();
-            categoriesSceneController.accept(state);
+            while (true){
+                GameState state = (GameState) in.readObject();
+                categoriesSceneController.accept(state);
+            }
         }
         catch(Exception e){
             System.out.println(e.getMessage());

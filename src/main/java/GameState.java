@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 public class GameState implements Serializable {
+    private static final long serialVersionUID = 1234567L;
     ArrayList<String> word;
     int length;
     int round_outcome;
