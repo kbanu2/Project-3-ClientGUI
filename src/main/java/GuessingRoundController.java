@@ -77,7 +77,7 @@ public class GuessingRoundController{
     }
 
     public void DisplayWordLabels(int wordsize) {
-        System.out.println("WORD: " + game.word);
+        //System.out.println("WORD: " + game.);
         WordPlace.setSpacing(20);
 
         for (int i = 0; i < game.length; i++) {
@@ -95,9 +95,6 @@ public class GuessingRoundController{
     //Helper funtion that handles selected button
     public void SelectLetter(Button b, String s, ActionEvent event){
         client.sendGuess(s); 
-        //I am sending the guess
-        //The gameState updates
-        //Do I need to receive it back changed??
 
         b.setStyle("-fx-background-color:#000000; -fx-text-fill: #FFFFFF;");
         b.setDisable(true);

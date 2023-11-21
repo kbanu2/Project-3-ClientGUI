@@ -77,6 +77,7 @@ public class CategoriesSceneController{
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
         grc.getGame(game);
         grc.DisplayWordLabels(game.length);
+        grc.getClient(client);
         
     }
 
@@ -99,6 +100,7 @@ public class CategoriesSceneController{
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
         grc.getGame(game);
         grc.DisplayWordLabels(game.length);
+        grc.getClient(client);
     }
 
     public void ChooseCategory3(ActionEvent event) throws IOException {
@@ -121,6 +123,7 @@ public class CategoriesSceneController{
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
         grc.getGame(game);
         grc.DisplayWordLabels(game.length);
+        grc.getClient(client);
     }
 
 }
