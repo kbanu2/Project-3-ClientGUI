@@ -59,14 +59,12 @@ public class CategoriesSceneController{
     //Code below handles functionality of each category button
 
     public void ChooseCategory1(ActionEvent event) throws IOException {
-        client.pickCategory(1);
-        
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
         client.setGuessingRoundSceneController(grc);
-        
+        client.pickCategory(1);
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -75,21 +73,20 @@ public class CategoriesSceneController{
         grc.DisplayCategory("Food");
         grc.DisplayWords(String.valueOf(game.words_guessed));
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
-        grc.getGame(game);
+        //grc.getGame(game);
         grc.DisplayWordLabels(game.length);
         grc.getClient(client);
         
     }
 
     public void ChooseCategory2(ActionEvent event) throws IOException {
-
-        client.pickCategory(2);
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
         client.setGuessingRoundSceneController(grc);
-        
+        client.pickCategory(2);
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -98,21 +95,21 @@ public class CategoriesSceneController{
         grc.DisplayCategory("Food");
         grc.DisplayWords(String.valueOf(game.words_guessed));
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
-        grc.getGame(game);
+        //grc.getGame(game);
         grc.DisplayWordLabels(game.length);
         grc.getClient(client);
+        
+        
     }
 
     public void ChooseCategory3(ActionEvent event) throws IOException {
-
-        client.pickCategory(3);
     
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GuessingRound.fxml"));
         root = loader.load();
         GuessingRoundController grc = loader.getController();
         client.setGuessingRoundSceneController(grc);
-        
+        client.pickCategory(3);
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -121,9 +118,11 @@ public class CategoriesSceneController{
         grc.DisplayCategory("Food");
         grc.DisplayWords(String.valueOf(game.words_guessed));
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
-        grc.getGame(game);
+        //grc.getGame(game);
         grc.DisplayWordLabels(game.length);
         grc.getClient(client);
+        
+        
     }
 
 }

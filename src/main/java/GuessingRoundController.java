@@ -47,9 +47,6 @@ public class GuessingRoundController{
 
     public void getGame(GameState g){
         game = g;
-        System.out.println("1receiving GUESSES: " +g.guesses_left);
-        System.out.println("2receiving LENGTH: " +g.length);
-        System.out.println("3receiving WON/LOST: " +g.roundWon);
        
     }
 
@@ -84,7 +81,7 @@ public class GuessingRoundController{
         
         WordPlace.setSpacing(20);
 
-        for (int i = 0; i < game.length; i++) {
+        for (int i = 0; i < wordsize; i++) {
             letterLabel.add(new Label());
             letterLabel.get(i).setText("_"); 
             letterLabel.get(i).setStyle("-fx-font-size: 3em; -fx-font-family: 'Bell MT';");           
@@ -99,25 +96,24 @@ public class GuessingRoundController{
     //Helper funtion that handles selected button
     public void SelectLetter(Button b, String s, ActionEvent event){
         client.sendGuess(s); 
+        System.out.println("GUESS:" + s + " OUTCOME: " + game.round_outcome);
 
         b.setStyle("-fx-background-color:#000000; -fx-text-fill: #FFFFFF;");
         b.setDisable(true);
         
         //When a guess has been made
-        if(game.round_outcome==1){   //Correct guess
-
+        //if(game.round_outcome==1){   //Correct guess
+            System.out.println("VALID GUESS ");
             //Check if it is a hit or a miss and update label
             for(int i=0; i<game.length; i++){
-                if(s.equals(game.word.get(i))){
-                    letterLabel.get(i).setText(s);
-                }
+                letterLabel.get(i).setText(game.word.get(i));
             }
 
             UpdateGuesses(String.valueOf(game.guesses_left));  //Update remaining guesses
 
-        }else if(game.round_outcome==-1){    //Wasted all the guesses 
+        if(game.round_outcome==-1){    //Wasted all the guesses 
         
-            UpdateGuesses(String.valueOf(game.guesses_left));
+            //UpdateGuesses(String.valueOf(game.guesses_left));
 
             //Checking which category has been played and if the game is over or if the player has additional attempts
             //Checking if category 1 was the currently played category
@@ -206,9 +202,7 @@ public class GuessingRoundController{
         //If player won the round
         }else if(game.round_outcome==10){  
             for(int i=0; i<game.length; i++){
-                if(s.equals(game.word.get(i))){
-                    letterLabel.get(i).setText(s);
-                }
+                letterLabel.get(i).setText(game.word.get(i));
             }
 
             //Checking if user won the game
@@ -259,7 +253,6 @@ public class GuessingRoundController{
                         scene = new Scene(root);
                         stage.setScene(scene);
                         stage.show(); 
-                        //csc.InitializeGame();
                         csc.setUser(username);
 			            }
 		            });
@@ -293,7 +286,9 @@ public class GuessingRoundController{
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show(); 
+                    csc.accept(game);
                     csc.setGame();
+                    csc.getClient(client);
                     csc.setUser(username);
                 });
 
@@ -301,6 +296,8 @@ public class GuessingRoundController{
 
             }
         }
+
+        
     }
 
     //Separate event handlers for each button refferencing the helper function that handles button functionality

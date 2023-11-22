@@ -41,18 +41,15 @@ public class Client extends Thread{
         }
 
         try{
-            int i = 0;
-
+            //state = (GameState) in.readObject();
+            
+           
             while (true){
                 state = (GameState) in.readObject();
-                System.out.println("receiving GUESSES: " +state.guesses_left);
-                System.out.println("receiving LENGTH: " +state.length);
-                System.out.println("receiving WON/LOST: " +state.roundWon);
 
                 categoriesSceneController.accept(state);
-                //System.out.println(in.readObject().toString());
+                
                 guessingRoundSceneController.getGame(state);
-                i++;
             }
         }
         catch(Exception e){
