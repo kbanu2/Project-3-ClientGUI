@@ -98,15 +98,12 @@ public class GuessingRoundController{
         client.sendGuess(s);
         client.getGameState();
 
-        System.out.println("GUESS:" + s + " OUTCOME: " + game.round_outcome);
-
         b.setStyle("-fx-background-color:#000000; -fx-text-fill: #FFFFFF;");
         b.setDisable(true);
         
         //When a guess has been made
         //if(game.round_outcome==1){   //Correct guess
-            System.out.println("VALID GUESS ");
-            //Check if it is a hit or a miss and update label
+        //Check if it is a hit or a miss and update label
             for(int i=0; i<game.length; i++){
                 letterLabel.get(i).setText(game.word.get(i));
             }
@@ -157,7 +154,8 @@ public class GuessingRoundController{
                             
                     }
                     CategoriesSceneController csc = loader.getController();
-                        
+                    client.setCategoriesController(csc);
+
                     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
@@ -250,6 +248,7 @@ public class GuessingRoundController{
                             
                         }
                         CategoriesSceneController csc = loader.getController();
+                        client.setCategoriesController(csc);
                         
                         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                         scene = new Scene(root);

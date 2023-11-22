@@ -7,8 +7,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Green;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CategoriesSceneController">
    <children>
+      <MenuBar>
+         <Menu text="Help Playing">
+            <MenuItem fx:id="tutorialMenuItem" text="Tutorial" onAction="#showTutorial"/>
+         </Menu>
+         <Menu text="Exit">
+            <MenuItem fx:id="exit" text="Exit Game :(" onAction="#exit"/>
+         </Menu>
+      </MenuBar>
       <Label layoutX="198.0" layoutY="14.0" text="Choose A Category">
          <font>
             <Font name="Bell MT Bold" size="24.0" />

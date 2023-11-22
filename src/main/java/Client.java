@@ -48,8 +48,7 @@ public class Client extends Thread{
         catch(Exception e){
             e.printStackTrace();
         }
-
-    }  
+    }
     
     public void pickCategory(int category){
         try {
@@ -82,6 +81,4 @@ public class Client extends Thread{
             System.out.println(e.getMessage());
         }
     }
-
-    
 }

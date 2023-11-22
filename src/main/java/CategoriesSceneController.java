@@ -3,6 +3,8 @@
 
 
 import java.io.IOException;
+
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,11 +12,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class CategoriesSceneController{
-    
+
+    public MenuItem tutorialMenuItem;
+    public MenuItem exit;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -54,6 +64,31 @@ public class CategoriesSceneController{
         if(game.category3==1){
             Category3.setDisable(true);
         }
+    }
+
+    public void showTutorial(){
+        Popup popup = new Popup();
+        Label label1 = new Label("In each category you must correct the correct letters of the word");
+        Label label2 = new Label("You get 6 guesses per word, if you guess right, your guesses will not go down");
+        Label label3 = new Label("You get 3 attempts to guess the word per category, if you fail then you lose!");
+        Label label4 = new Label("If you guess the word in all of the categories, you win!");
+        VBox vBox = new VBox(label1,label2,label3,label4);
+        popup.getContent().add(vBox);
+
+        popup.show(Category1.getScene().getWindow());
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(10));
+
+        //Delay before changing the scene
+        pause.setOnFinished(e -> {
+            popup.hide();
+        });
+
+        pause.play();
+    }
+
+    public void exit(){
+        System.exit(0);
     }
 
     //Code below handles functionality of each category button
