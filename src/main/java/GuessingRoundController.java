@@ -95,7 +95,9 @@ public class GuessingRoundController{
     
     //Helper funtion that handles selected button
     public void SelectLetter(Button b, String s, ActionEvent event){
-        client.sendGuess(s); 
+        client.sendGuess(s);
+        client.getGameState();
+
         System.out.println("GUESS:" + s + " OUTCOME: " + game.round_outcome);
 
         b.setStyle("-fx-background-color:#000000; -fx-text-fill: #FFFFFF;");

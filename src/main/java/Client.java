@@ -41,15 +41,12 @@ public class Client extends Thread{
         }
 
         try{
-            //state = (GameState) in.readObject();
-            
-           
-            while (true){
-                state = (GameState) in.readObject();
+            state = (GameState) in.readObject();
+            categoriesSceneController.accept(state);
+            guessingRoundSceneController.getGame(state);
 
-                categoriesSceneController.accept(state);
-                
-                guessingRoundSceneController.getGame(state);
+            while (true){
+                //Keep the client thread running so that we can use the in, out variables
             }
         }
         catch(Exception e){
@@ -65,6 +62,17 @@ public class Client extends Thread{
         }
         catch(Exception e){
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void getGameState(){
+        try{
+            state = (GameState) in.readObject();
+            categoriesSceneController.accept(state);
+            guessingRoundSceneController.getGame(state);
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 
