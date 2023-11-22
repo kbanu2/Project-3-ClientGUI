@@ -45,11 +45,15 @@ public class GuessingRoundController{
 
     GameState game;
 
-    // public void accept(GameState g){
-    //     game = g;
-    // }
-
     public void getGame(GameState g){
+        game = g;
+        System.out.println("1receiving GUESSES: " +g.guesses_left);
+        System.out.println("2receiving LENGTH: " +g.length);
+        System.out.println("3receiving WON/LOST: " +g.roundWon);
+       
+    }
+
+    public void accept(GameState g){
         game = g;
     }
 
@@ -77,7 +81,7 @@ public class GuessingRoundController{
     }
 
     public void DisplayWordLabels(int wordsize) {
-        //System.out.println("WORD: " + game.);
+        
         WordPlace.setSpacing(20);
 
         for (int i = 0; i < game.length; i++) {
@@ -98,7 +102,7 @@ public class GuessingRoundController{
 
         b.setStyle("-fx-background-color:#000000; -fx-text-fill: #FFFFFF;");
         b.setDisable(true);
-
+        
         //When a guess has been made
         if(game.round_outcome==1){   //Correct guess
 
@@ -200,7 +204,7 @@ public class GuessingRoundController{
 
             
         //If player won the round
-        }else{  
+        }else if(game.round_outcome==10){  
             for(int i=0; i<game.length; i++){
                 if(s.equals(game.word.get(i))){
                     letterLabel.get(i).setText(s);

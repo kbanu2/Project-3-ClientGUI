@@ -1,7 +1,5 @@
-
 import java.io.Serializable;
 import java.util.ArrayList;
-
 
 public class GameState implements Serializable {
     private static final long serialVersionUID = 1234567L;
@@ -22,6 +20,7 @@ public class GameState implements Serializable {
     public GameState(){
 
     }
+
     public GameState(GameState state){
         this.word = state.word;
         this.length = state.length;

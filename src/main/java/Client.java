@@ -10,6 +10,7 @@ public class Client extends Thread{
     ObjectOutputStream out;
     CategoriesSceneController categoriesSceneController;
     GuessingRoundController guessingRoundSceneController;
+    GameState state;
 
     public Client(int port, String username){
         this.port = port;
@@ -17,10 +18,12 @@ public class Client extends Thread{
     }
 
     public void setCategoriesController(CategoriesSceneController categoriesSceneController){
+        
         this.categoriesSceneController = categoriesSceneController;
     }
 
     public void setGuessingRoundSceneController(GuessingRoundController guessingRoundSceneController){
+        
         this.guessingRoundSceneController = guessingRoundSceneController;
     }
 
@@ -38,14 +41,24 @@ public class Client extends Thread{
         }
 
         try{
+            int i = 0;
+
             while (true){
-                GameState state = (GameState) in.readObject();
+                state = (GameState) in.readObject();
+                System.out.println("receiving GUESSES: " +state.guesses_left);
+                System.out.println("receiving LENGTH: " +state.length);
+                System.out.println("receiving WON/LOST: " +state.roundWon);
+
                 categoriesSceneController.accept(state);
+                //System.out.println(in.readObject().toString());
+                guessingRoundSceneController.getGame(state);
+                i++;
             }
         }
         catch(Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
+
     }  
     
     public void pickCategory(int category){

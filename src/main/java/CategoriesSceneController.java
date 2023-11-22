@@ -32,6 +32,7 @@ public class CategoriesSceneController{
 
     public void accept(GameState g){
         game = g;
+
     }
 
     public void getClient(Client c){
@@ -58,7 +59,6 @@ public class CategoriesSceneController{
     //Code below handles functionality of each category button
 
     public void ChooseCategory1(ActionEvent event) throws IOException {
-       
         client.pickCategory(1);
         
 
