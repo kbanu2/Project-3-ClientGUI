@@ -41,10 +41,6 @@ public class Client extends Thread{
         }
 
         try{
-            state = (GameState) in.readObject();
-            categoriesSceneController.accept(state);
-            guessingRoundSceneController.getGame(state);
-
             while (true){
                 //Keep the client thread running so that we can use the in, out variables
             }
@@ -58,7 +54,9 @@ public class Client extends Thread{
     public void pickCategory(int category){
         try{
             out.writeObject(category);
-
+            state = (GameState) in.readObject();
+            categoriesSceneController.accept(state);
+            guessingRoundSceneController.getGame(state);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
