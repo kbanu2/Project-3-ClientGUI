@@ -52,7 +52,7 @@ public class Client extends Thread{
     }  
     
     public void pickCategory(int category){
-        try{
+        try {
             out.writeObject(category);
             state = (GameState) in.readObject();
             categoriesSceneController.accept(state);

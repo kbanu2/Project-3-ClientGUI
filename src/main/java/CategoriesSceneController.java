@@ -23,8 +23,8 @@ public class CategoriesSceneController{
     Button Category1, Category2, Category3;
 
     String username;
-    Client client;
-    GameState game;
+    static Client client;
+    static GameState game;
     public void setUser(String name){
         username = name;
         
@@ -92,7 +92,7 @@ public class CategoriesSceneController{
         stage.setScene(scene);
         stage.show(); 
         grc.DisplayUser(username);
-        grc.DisplayCategory("Food");
+        grc.DisplayCategory("Animals");
         grc.DisplayWords(String.valueOf(game.words_guessed));
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
         //grc.getGame(game);
@@ -115,14 +115,13 @@ public class CategoriesSceneController{
         stage.setScene(scene);
         stage.show(); 
         grc.DisplayUser(username);
-        grc.DisplayCategory("Food");
+        grc.DisplayCategory("Countries");
         grc.DisplayWords(String.valueOf(game.words_guessed));
         grc.UpdateGuesses(String.valueOf(game.guesses_left));
         //grc.getGame(game);
         grc.DisplayWordLabels(game.length);
         grc.getClient(client);
-        
-        
+
     }
 
 }
